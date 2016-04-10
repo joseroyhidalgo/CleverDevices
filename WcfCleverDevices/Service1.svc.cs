@@ -111,25 +111,27 @@ namespace WcfCleverDevices
         /// <returns>Counts of prime numbers from [1-N]</returns>
         public int CountPrimeByCSharp(long ceilingNumber)
         {
-            bool isPrime = true;
-            int primeCount = 0;
-            for (int i = 2; i <= ceilingNumber; i++)
+            int count = 0;
+            for(int c=0; c <= ceilingNumber;c++)
             {
-                for (int j = 2; j <= ceilingNumber; j++)
+                if(isPrime(c))
                 {
-                    if (i != j && i % j == 0)
-                    {
-                        isPrime = false;
-                        break;
-                    }
+                    count++;
                 }
-                if (isPrime)
-                {
-                    primeCount++;
-                }
-                isPrime = true;
             }
-            return primeCount;
+            return count;
+        }
+
+        private bool isPrime(int number)
+        {
+            if (number < 2) return false;
+            if (number % 2 == 0) return (number == 2);
+            int root = (int)Math.Sqrt((double)number);
+            for (int i = 3; i <= root; i += 2)
+            {
+                if (number % i == 0) return false;
+            }
+            return true;
         }
     }
 }
